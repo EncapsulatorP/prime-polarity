@@ -2,8 +2,23 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![CI](https://github.com/kugguk2022/prime-polarity/workflows/CI/badge.svg)](https://github.com/kugguk2022/prime-polarity/actions)
 
 A framework for empirically scoring the **prime-signal polarity** of number-theoretic generators, with formal polarity measurement and amplification transforms.
+
+## 🚀 Quick Start
+
+```bash
+# Install
+pip install prime-polarity
+
+# Basic usage - analyze polarity over range [100000, 120000]
+prime-polarity --start 100000 --end 120000 --windows 3 --window-size 5000
+
+# Or run the included quickstart script
+./examples/quickstart.sh
+```
+
 **Prime Polarity** is not a primality test. It is a scoring harness:
 - You define numeric generators \(G(n)\) (e.g., \(Z(n)\), variants, transforms).
 - The tool labels \(n\) as prime/composite.

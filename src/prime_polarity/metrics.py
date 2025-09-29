@@ -1,11 +1,13 @@
 import numpy as np
 from .sieves import prime_sieve_up_to
 
+
 def labels_for_range(start: int, end: int) -> np.ndarray:
     """Boolean labels array for n in [start, end], True if prime."""
     is_prime = prime_sieve_up_to(end)
-    labels = np.array([is_prime[n] for n in range(start, end+1)], dtype=bool)
+    labels = np.array([is_prime[n] for n in range(start, end + 1)], dtype=bool)
     return labels
+
 
 def auc_from_scores(scores: np.ndarray, labels: np.ndarray) -> float:
     """
@@ -15,7 +17,7 @@ def auc_from_scores(scores: np.ndarray, labels: np.ndarray) -> float:
     n = len(scores)
     order = np.argsort(scores, kind="mergesort")
     ranks = np.empty(n, dtype=float)
-    ranks[order] = np.arange(1, n+1, dtype=float)
+    ranks[order] = np.arange(1, n + 1, dtype=float)
     pos = labels
     neg = ~labels
     n_pos = pos.sum()
@@ -23,11 +25,13 @@ def auc_from_scores(scores: np.ndarray, labels: np.ndarray) -> float:
     if n_pos == 0 or n_neg == 0:
         return 0.5
     sum_ranks_pos = ranks[pos].sum()
-    auc = (sum_ranks_pos - n_pos*(n_pos+1)/2.0) / (n_pos*n_neg)
+    auc = (sum_ranks_pos - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg)
     return float(auc)
 
+
 def polarity_index(auc: float) -> float:
-    return 2.0*auc - 1.0
+    return 2.0 * auc - 1.0
+
 
 def split_windows(start: int, end: int, windows: int, window_size: int = None):
     """Create [start_i, end_i] windows covering [start,end]."""
@@ -43,6 +47,7 @@ def split_windows(start: int, end: int, windows: int, window_size: int = None):
         if s > end:
             break
     return ranges
+
 
 def stability(pis, min_pi: float = 0.2, max_rel_var: float = 0.2) -> bool:
     """

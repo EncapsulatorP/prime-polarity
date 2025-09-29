@@ -1,3 +1,4 @@
+# Python artifacts
 __pycache__/
 *.pyc
 *.pyo
@@ -7,6 +8,34 @@ dist/
 build/
 .venv/
 .env
+
+# Testing and coverage
 htmlcov/
 .coverage*
+.pytest_cache/
+.tox/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
 .ipynb_checkpoints/
+
+# Data files
+*.csv
+*.json
+data/
+results/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

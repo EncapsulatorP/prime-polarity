@@ -1,17 +1,21 @@
+from typing import Optional
 from mpmath import mp, zeta, pi
 
-def set_precision(dps: int = 50):
+
+def set_precision(dps: int = 50) -> None:
     """Set mpmath decimal precision (digits)."""
     mp.dps = max(30, int(dps))
 
-def Z_raw(n: int) -> float | None:
+
+def Z_raw(n: int) -> Optional[float]:
     """Z(n) = exp(pi * zeta(n-1) / n) + 1. Defined for n>=3 (zeta(1) pole)."""
     if n <= 2:
         return None
-    val = mp.e**(pi * zeta(n - 1) / n) + 1
+    val = mp.e ** (pi * zeta(n - 1) / n) + 1
     return float(val)
 
-def Z_o_placeholder(n: int) -> float | None:
+
+def Z_o_placeholder(n: int) -> Optional[float]:
     """
     Placeholder for Z(o): a Dirichlet-character flavored variant.
     Example: project Z(n) through a real character mod 4.

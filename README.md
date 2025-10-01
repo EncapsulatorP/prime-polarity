@@ -1,3 +1,4 @@
+<div style="color: #888;">
 # Prime Polarity — Z(p)-Z(o) generators vs prime generators
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -111,5 +112,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
+</div>  
   <em>Empirical number theory meets measurable signal detection</em>
 </p>
+>

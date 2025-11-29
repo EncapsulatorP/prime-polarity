@@ -9,17 +9,35 @@ def labels_for_range(start: int, end: int) -> np.ndarray:
 
 def auc_from_scores(scores: np.ndarray, labels: np.ndarray) -> float:
     """
-    Compute ROC AUC without sklearn using the rank method.
+    Compute ROC AUC (tie-aware) without sklearn using average ranks on ties.
     """
     assert len(scores) == len(labels)
+    scores = np.asarray(scores, dtype=float)
+    labels = np.asarray(labels, dtype=bool)
+
     n = len(scores)
     order = np.argsort(scores, kind="mergesort")
+    sorted_scores = scores[order]
     ranks = np.empty(n, dtype=float)
-    ranks[order] = np.arange(1, n+1, dtype=float)
+
+    # Average ranks for tied scores
+    i = 0
+    while i < n:
+        j = i + 1
+        while j < n and sorted_scores[j] == sorted_scores[i]:
+            j += 1
+        avg_rank = 0.5 * (i + 1 + j)
+        ranks[i:j] = avg_rank
+        i = j
+
+    inv = np.empty(n, dtype=int)
+    inv[order] = np.arange(n)
+    ranks = ranks[inv]
+
     pos = labels
     neg = ~labels
-    n_pos = pos.sum()
-    n_neg = neg.sum()
+    n_pos = int(pos.sum())
+    n_neg = int(neg.sum())
     if n_pos == 0 or n_neg == 0:
         return 0.5
     sum_ranks_pos = ranks[pos].sum()
